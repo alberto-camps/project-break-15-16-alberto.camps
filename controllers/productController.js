@@ -5,8 +5,23 @@
 
 const { error } = require("node:console")
 const ProductModel = require("../models/Product")
+const template = require('../helpers/template');
+const getProductCards = require('../helpers/getProductCards');
 
 const productController = {
+
+    //Convertir datos a HTML para que devuelva la web
+    showProductsHTML: async (req, res) => {
+        try {
+            const products = await ProductModel.find();
+            const cardsHtml = getProductCards(products);
+            const html = template(cardsHtml);
+            res.send(html)
+        } catch(error) {
+            console.error(error);
+            res.status(500).send('Error al cargar productos');
+        }
+    },
 
     // -----------Solo se han creado el get y post para probar que todo funciona-----------
 

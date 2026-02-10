@@ -12,6 +12,7 @@ const router  =  express.Router();
 
 // Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
     router.get('/products', productController.showProducts)
+    router.get('/', productController.showProductsHTML);//para ver la tienda en el navegador
 
 // Devuelve el detalle de un producto.
 // En el dashboard aparecerán todos los artículos que se hayan subido.

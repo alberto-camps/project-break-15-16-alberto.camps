@@ -16,10 +16,11 @@ const swaggerUI = require('swagger-ui-express')
 const docs = require('./docs/index')
 */
 
+/* COMPROBAR QUE EXPRESS ARRANCA
 app.get("/",(req,res)=>{
     res.send("hello world");
 })
-
+ */
 app.use(express.json());
 
 app.use('/', routes);
