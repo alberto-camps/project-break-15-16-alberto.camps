@@ -8,18 +8,35 @@ const productController = require("../controllers/productController")
 const router  =  express.Router();
 
 
-// ------------TIENDA PÚBLICA------------
+// ------------TIENDA PÚBLICA (HTML)------------
+
+
+//home de la tienda lista
+router.get('/', productController.showProductsHTML);
+
+//detalle de oroducto(HTML)
+router.get('/products/:productId', productController.showProductDetailHTML);
 
 // Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
-    router.get('/products', productController.showProducts)
-    router.get('/', productController.showProductsHTML);//para ver la tienda en el navegador
+
+//devuelve API (JSON)
+router.get('/api/products', productController.showProducts);
+// Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.  
+router.get('/api/products/:productId', productController.showProductById);
+
 
 // Devuelve el detalle de un producto.
 // En el dashboard aparecerán todos los artículos que se hayan subido.
-// Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.  
-    router.get('/products/:productId', productController.showProductById)
+
+
 
     // ------------DASHBOARD DE ADMINISTRACIÓN------------ 
+
+//API
+
+router.post('/dashboard', productController.createProduct);//Crea un nuevo producto
+router.put('/dashboard/:productId', productController.updateProduct);//Actualiza un producto
+router.delete('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
     
 /*
 // Devuelve el dashboard del administrador    
@@ -28,9 +45,6 @@ const router  =  express.Router();
 // Devuelve el formulario para subir un artículo nuevo
     router.get('/dashboard/new', productController.showNewProduct)
 */
-
-// Crea un nuevo producto.
-    router.post('/dashboard', productController.createProduct)
 /*
 
 // Devuelve el detalle de un producto en el dashboard.
@@ -40,11 +54,6 @@ const router  =  express.Router();
     router.get('/dashboard/:productId/edit', productController.showEditProduct) 
 
     */
-// Actualiza un producto.
-    router.put('/dashboard/:productId', productController.updateProduct)
-
-// Elimina un producto.
-    router.delete('/dashboard/:productId/delete', productController.deleteProduct)
 
 
 module.exports = router;

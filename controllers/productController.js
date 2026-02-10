@@ -23,6 +23,33 @@ const productController = {
         }
     },
 
+    //Vista HTML detalle de producto
+    showProductDetailHTML: async(req, res) => {
+        try {
+            const { productId } = req.params;
+            const product = await ProductModel.findById(productId);
+
+            if(!product) {
+                return res.status(404).send('Producto no encontrado');
+            }
+
+            const html = template(`
+                <div class="product-detail">
+                  <img src="${product.image}" alt="${product.name}" />
+                  <h1>${product.name}</h1>
+                  <p>${product.description}</p>
+                  <p><strong>${product.price} €</strong></p>
+                  <a href="/">Volver a la tienda</a>
+                </div>
+            `);
+
+            res.send(html);
+        }catch(error){
+            console.error(error);
+            res.status(500).send('Error al cargar el producto');
+        }
+    },
+
     // -----------Solo se han creado el get y post para probar que todo funciona-----------
 
     // ------------TIENDA PÚBLICA------------
