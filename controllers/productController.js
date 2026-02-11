@@ -7,6 +7,7 @@ const { error } = require("node:console")
 const ProductModel = require("../models/Product")
 const template = require('../helpers/template');
 const getProductCards = require('../helpers/getProductCards');
+/* const generateDasboardHtml = require('../helpers/dashboardHtml'); */
 
 const productController = {
 
@@ -104,15 +105,16 @@ const productController = {
         }
     },
 
-    showDashboard: async (req, res) => {
-        try {
-            const products = await ProductModel.find();
-            res.json({ data: products, message: "Dashboard loaded successfully" });
-        } catch (error) {
-            console.error(error);
-            res.status(500).send({ error: "Error while loading dashboard" });
-        }
-    },
+/* showDashboardHTML: async (req, res) => {
+    try {
+        const products = await ProductModel.find();
+        const dashboardHtml = generateDasboardHtml(products);
+        res.send(dashboardHtml);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error while loading dashboard");
+    }
+}, */
 
     updateProduct: async (req, res) => {
         try {

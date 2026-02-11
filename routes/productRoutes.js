@@ -38,14 +38,12 @@ router.post('/dashboard', productController.createProduct);//Crea un nuevo produ
 router.put('/dashboard/:productId', productController.updateProduct);//Actualiza un producto
 router.delete('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
     
-// Devuelve el dashboard del administrador    
-router.get('/dashboard', productController.showDashboard)
 /*
+// Devuelve el dashboard del administrador    
+router.get('/dashboard', productController.showDashboard);
 
 // Devuelve el formulario para subir un artículo nuevo
     router.get('/dashboard/new', productController.showNewProduct)
-*/
-/*
 
 // Devuelve el detalle de un producto en el dashboard.
     router.get('/dashboard/:productId', productController.showDashboardProductById)
