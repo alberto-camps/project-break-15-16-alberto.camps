@@ -104,6 +104,16 @@ const productController = {
         }
     },
 
+    showDashboard: async (req, res) => {
+        try {
+            const products = await ProductModel.find();
+            res.json({ data: products, message: "Dashboard loaded successfully" });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ error: "Error while loading dashboard" });
+        }
+    },
+
     updateProduct: async (req, res) => {
         try {
             const id = req.params.productId;

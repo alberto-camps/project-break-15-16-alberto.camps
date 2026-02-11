@@ -1,7 +1,7 @@
 function getNavBar() {
    return `
      <nav>
-       <a href="/products>Proudctos</a>
+       <a href="/products">Productos</a>
        <a href="/dashboard">Dashboard</a>
      </nav>
    `;

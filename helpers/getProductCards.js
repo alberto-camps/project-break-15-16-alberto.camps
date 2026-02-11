@@ -9,8 +9,8 @@ function getProductCards (products) {
    for (const product of products) {
        html += `
         <div class="product-card">
-            <img src="${product.image}" alt="${product.name}" />
             <h2>${product.name}</h2>
+            <img src="${product.image}" alt="${product.name}" />
             <p>${product.price} €</p>
             <a href="/products/${product._id}">Ver detalle</a>
         </div>  
