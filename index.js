@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 const { dbConnection } = require('./config/db');
 const routes = require('./routes/productRoutes');
 const mongo_uri = process.env.MONGO_URI
+const methodOverride = require('method-override');
 
 /* Swagger
 const swaggerUI = require('swagger-ui-express')
@@ -22,6 +23,8 @@ app.get("/",(req,res)=>{
 })
  */
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use('/', routes);
 

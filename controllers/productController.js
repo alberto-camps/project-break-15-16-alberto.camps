@@ -98,7 +98,7 @@ const productController = {
         try {
             const { name, description, image, category, price, size } = req.body;
             const newProduct = await ProductModel.create({ name, description, image, category, size, price });
-            res.status(201).json(newProduct);
+            res.redirect('./dashboard');
         } catch (error) {
             console.error("Error while creating product:", error);
             res.status(500).json({ error: "Error while creating product" });
@@ -115,6 +115,48 @@ showDashboardHtml: async (req, res) => {
         res.status(500).send("Error while loading dashboard");
     }
 },
+    //formulario d emodificación de producto
+    showNewProductForm: (req, res) => {
+        const html = template(`
+            <h1>Crear nuevo producto</h1>
+            <form action="/dashboard" method="POST">
+
+              <label>Nombre:</label>
+              <input type="text" name="name" required />
+
+              <label>Descripción:</label>
+              <textarea name="description" required></textarea>
+
+              <label>Imagen (URL):</label>
+              <input tupe="text" name="image" required />
+
+              <label>Categoría:</label>
+              <select name ="category" required>
+                <option value="">Selecciona categoría</option>
+                <option value="Camisetas">Camisetas</option>
+                <option value="Pantalones">Pantalones</option>
+                <option value="Zapatos">Zapatos</option>
+                <option value="Accesorios">Accesorios</option>
+              </select>
+
+              <label>Talla:</label>
+              <select name="size" required>
+                <option value="">Selecciona talla</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </select>
+            
+              <label>Precio:</label>
+              <input type="number" name="price" required />
+
+              <button type="submit">Crear producto</button>
+            </form>
+            `);
+        res.send(html);
+    },
 
     updateProduct: async (req, res) => {
         try {
@@ -132,13 +174,14 @@ showDashboardHtml: async (req, res) => {
         try {
             const id = req.params.productId;
             const deletedProduct = await ProductModel.findByIdAndDelete(id);
-            res.json({ data: deletedProduct, message: "Product deleted successfully" });
+            res.redirect('/dashboard');
 
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: "Error while deleting product" });
         }
-    }
+    },
+
 }
 
 module.exports = productController

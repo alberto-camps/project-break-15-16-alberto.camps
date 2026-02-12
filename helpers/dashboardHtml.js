@@ -12,7 +12,7 @@ function generateDashboardHtml(products) {
             <img src="${product.image}" alt="${product.name}" />
             <p>${product.price} €</p>
             <a href="/products/${product._id}/edit">Editar</a>
-            <form action="/dashboard/${product._id}/delete" method="POST" style="display:inline;">
+            <form action="/dashboard/${product._id}/delete" method="POST">
                 <button type="submit">Eliminar</button>
             </form>
         </div>  

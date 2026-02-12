@@ -35,9 +35,11 @@ router.get('/api/products/:productId', productController.showProductById);
 //API
 router.get('/dashboard', productController.showDashboardHtml);
 
+router.get('/dashboard/new', productController.showNewProductForm);
+
 router.post('/dashboard', productController.createProduct);//Crea un nuevo producto
 router.put('/dashboard/:productId', productController.updateProduct);//Actualiza un producto
-router.delete('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
+router.post('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
 
 /*
 // Devuelve el dashboard del administrador    
