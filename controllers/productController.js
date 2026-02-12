@@ -7,12 +7,12 @@ const { error } = require("node:console")
 const ProductModel = require("../models/Product")
 const template = require('../helpers/template');
 const getProductCards = require('../helpers/getProductCards');
-/* const generateDasboardHtml = require('../helpers/dashboardHtml'); */
+const generateDashboardHtml = require('../helpers/dashboardHtml');
 
 const productController = {
 
     //Convertir datos a HTML para que devuelva la web
-    showProductsHTML: async (req, res) => {
+    showProductsHtml: async (req, res) => {
         try {
             const products = await ProductModel.find();
             const cardsHtml = getProductCards(products);
@@ -25,7 +25,7 @@ const productController = {
     },
 
     //Vista HTML detalle de producto
-    showProductDetailHTML: async(req, res) => {
+    showProductDetailHtml: async(req, res) => {
         try {
             const { productId } = req.params;
             const product = await ProductModel.findById(productId);
@@ -105,16 +105,16 @@ const productController = {
         }
     },
 
-/* showDashboardHTML: async (req, res) => {
+showDashboardHtml: async (req, res) => {
     try {
         const products = await ProductModel.find();
-        const dashboardHtml = generateDasboardHtml(products);
+        const dashboardHtml = generateDashboardHtml(products);
         res.send(dashboardHtml);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error while loading dashboard");
     }
-}, */
+},
 
     updateProduct: async (req, res) => {
         try {

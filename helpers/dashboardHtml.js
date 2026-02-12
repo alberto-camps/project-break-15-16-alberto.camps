@@ -1,4 +1,4 @@
-/* function generateDashboardHTML(products) {
+function generateDashboardHtml(products) {
     if (!products || products.length === 0) {
         return `<p>No hay productos disponibles</p>`;
     }
@@ -22,4 +22,4 @@
     return html;
 }
 
-module.exports = generateDashboardHTML; */
+module.exports = generateDashboardHtml;

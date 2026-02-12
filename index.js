@@ -22,7 +22,7 @@ app.get("/",(req,res)=>{
 })
  */
 app.use(express.json());
-
+app.use(express.static('public'));
 app.use('/', routes);
 
 /* Endpoint Swagger

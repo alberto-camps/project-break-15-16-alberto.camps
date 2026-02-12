@@ -12,10 +12,10 @@ const router  =  express.Router();
 
 
 //home de la tienda lista
-router.get('/', productController.showProductsHTML);
+router.get('/', productController.showProductsHtml);
 
 //detalle de oroducto(HTML)
-router.get('/products/:productId', productController.showProductDetailHTML);
+router.get('/products/:productId', productController.showProductDetailHtml);
 
 // Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
 
@@ -33,11 +33,12 @@ router.get('/api/products/:productId', productController.showProductById);
     // ------------DASHBOARD DE ADMINISTRACIÓN------------ 
 
 //API
+router.get('/dashboard', productController.showDashboardHtml);
 
 router.post('/dashboard', productController.createProduct);//Crea un nuevo producto
 router.put('/dashboard/:productId', productController.updateProduct);//Actualiza un producto
 router.delete('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
-    
+
 /*
 // Devuelve el dashboard del administrador    
 router.get('/dashboard', productController.showDashboard);
