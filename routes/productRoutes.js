@@ -12,7 +12,7 @@ const router  =  express.Router();
 
 
 //home de la tienda lista
-router.get('/', productController.showProductsHtml);
+router.get('/products', productController.showProductsHtml);
 
 //detalle de oroducto(HTML)
 router.get('/products/:productId', productController.showProductDetailHtml);
@@ -38,7 +38,8 @@ router.get('/dashboard', productController.showDashboardHtml);
 router.get('/dashboard/new', productController.showNewProductForm);
 
 router.post('/dashboard', productController.createProduct);//Crea un nuevo producto
-router.put('/dashboard/:productId', productController.updateProduct);//Actualiza un producto
+router.put('/dashboard/:productId/edit', productController.updateProduct);//Actualiza un producto
+router.get('/dashboard/:productId/edit', productController.showEditProductForm);//Muestra el formulario para editar un producto
 router.post('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
 
 /*

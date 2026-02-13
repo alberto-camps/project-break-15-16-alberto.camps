@@ -40,7 +40,7 @@ const productController = {
                   <h1>${product.name}</h1>
                   <p>${product.description}</p>
                   <p><strong>${product.price} €</strong></p>
-                  <a href="/">Volver a la tienda</a>
+                  <a href="/products">Volver a la tienda</a>
                 </div>
             `);
 
@@ -51,7 +51,6 @@ const productController = {
         }
     },
 
-    // -----------Solo se han creado el get y post para probar que todo funciona-----------
 
     // ------------TIENDA PÚBLICA------------
     showProducts: async (req,res) => {
@@ -98,7 +97,7 @@ const productController = {
         try {
             const { name, description, image, category, price, size } = req.body;
             const newProduct = await ProductModel.create({ name, description, image, category, size, price });
-            res.redirect('./dashboard');
+            res.redirect('/dashboard');
         } catch (error) {
             console.error("Error while creating product:", error);
             res.status(500).json({ error: "Error while creating product" });
@@ -158,6 +157,45 @@ showDashboardHtml: async (req, res) => {
         res.send(html);
     },
 
+    showEditProductForm: async (req, res) => {
+        try {
+            const { productId } = req.params;
+            const product = await ProductModel.findById(productId);
+            if (!product) {
+                return res.status(404).send("Producto no encontrado");
+            }
+            const html = template(`
+                <h1>Editar producto</h1>
+                <form action="/dashboard/${productId}/edit" method="POST">
+                    <input type="hidden" name="_method" value="PUT" />
+                    <input type="text" name="name" value="${product.name}" required />
+                    <textarea name="description" required>${product.description}</textarea>
+                    <input type="text" name="image" value="${product.image}" required />
+                    <select name="category" required>
+                        <option value="${product.category}" selected>${product.category}</option>
+                        <option value="Camisetas">Camisetas</option>
+                        <option value="Pantalones">Pantalones</option>
+                        <option value="Zapatos">Zapatos</option>
+                        <option value="Accesorios">Accesorios</option>
+                    </select>
+                    <select name="size" required>
+                        <option value="${product.size}" selected>${product.size}</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <input type="number" name="price" value="${product.price}" required />
+                    <button type="submit">Actualizar producto</button>
+                </form>`);
+        res.send(html);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Error while loading edit form");
+        }
+    },
+
     updateProduct: async (req, res) => {
         try {
             const id = req.params.productId;
@@ -171,16 +209,23 @@ showDashboardHtml: async (req, res) => {
     },
 
     deleteProduct: async (req, res) => {
-        try {
-            const id = req.params.productId;
-            const deletedProduct = await ProductModel.findByIdAndDelete(id);
-            res.redirect('/dashboard');
+    try {
+        const { productId } = req.params;
 
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Error while deleting product" });
+        const deletedProduct = await ProductModel.findByIdAndDelete(productId);
+
+        if (!deletedProduct) {
+            return res.status(404).send("Producto no encontrado");
         }
-    },
+
+        res.redirect('/dashboard');
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error while deleting product");
+    }
+},
+
 
 }
 

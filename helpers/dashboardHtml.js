@@ -1,9 +1,11 @@
+const getDashboardNavBar = require('./getDashboardNavBar');
+
 function generateDashboardHtml(products) {
     if (!products || products.length === 0) {
         return `<p>No hay productos disponibles</p>`;
     }
 
-    let html ='';
+    let html = getDashboardNavBar();
 
     for (const product of products) {
         html += `
@@ -11,7 +13,7 @@ function generateDashboardHtml(products) {
             <h2>${product.name}</h2>
             <img src="${product.image}" alt="${product.name}" />
             <p>${product.price} €</p>
-            <a href="/products/${product._id}/edit">Editar</a>
+            <a href="/dashboard/${product._id}/edit">Editar</a>
             <form action="/dashboard/${product._id}/delete" method="POST">
                 <button type="submit">Eliminar</button>
             </form>
