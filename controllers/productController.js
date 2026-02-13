@@ -114,7 +114,7 @@ showDashboardHtml: async (req, res) => {
         res.status(500).send("Error while loading dashboard");
     }
 },
-    //formulario d emodificación de producto
+    //formulario de modificación de producto
     showNewProductForm: (req, res) => {
         const html = template(`
             <h1>Crear nuevo producto</h1>
