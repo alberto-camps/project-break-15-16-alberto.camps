@@ -104,17 +104,38 @@ const productController = {
         }
     },
 
-showDashboardHtml: async (req, res) => {
-    try {
-        const products = await ProductModel.find();
-        const dashboardHtml = generateDashboardHtml(products);
-        res.send(dashboardHtml);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Error while loading dashboard");
-    }
-},
-    //formulario de modificación de producto
+    showDashboardHtml: async (req, res) => {
+        try {
+            const products = await ProductModel.find();
+            const dashboardHtml = generateDashboardHtml(products);
+            res.send(dashboardHtml);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Error while loading dashboard");
+        }
+    },
+
+    showDasboardProductById: async (req, res) => {
+        try {
+            const { productId } = req.params;
+            const product = await ProductModel.findById(productId);
+            if (!product) {
+                return res.status(404).send("Producto no encontrado");
+            }   
+            const html = template(`
+                <h1>Producto: ${product.name}</h1>
+                <img src="${product.image}" alt="${product.name}" />
+                <p>${product.description}</p>
+                <p><strong>${product.price} €</strong></p>
+                <a href="/dashboard">Volver al dashboard</a>
+            `);
+            res.send(html);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send("Error while loading product details");
+        }
+    },
+
     showNewProductForm: (req, res) => {
         const html = template(`
             <h1>Crear nuevo producto</h1>
@@ -156,7 +177,7 @@ showDashboardHtml: async (req, res) => {
             `);
         res.send(html);
     },
-
+ 
     showEditProductForm: async (req, res) => {
         try {
             const { productId } = req.params;
@@ -166,8 +187,7 @@ showDashboardHtml: async (req, res) => {
             }
             const html = template(`
                 <h1>Editar producto</h1>
-                <form action="/dashboard/${productId}/edit" method="POST">
-                    <input type="hidden" name="_method" value="PUT" />
+                <form action="/dashboard/${productId}?_method=PUT" method="POST">
                     <input type="text" name="name" value="${product.name}" required />
                     <textarea name="description" required>${product.description}</textarea>
                     <input type="text" name="image" value="${product.image}" required />
@@ -189,19 +209,20 @@ showDashboardHtml: async (req, res) => {
                     <input type="number" name="price" value="${product.price}" required />
                     <button type="submit">Actualizar producto</button>
                 </form>`);
-        res.send(html);
+            res.send(html);
         } catch (error) {
             console.error(error);
             res.status(500).send("Error while loading edit form");
         }
     },
+    
 
     updateProduct: async (req, res) => {
         try {
             const id = req.params.productId;
             const { name, description, image, category, price, size } = req.body;
             const updatedProduct = await ProductModel.findByIdAndUpdate(id, { name, description, image, category, price, size }, { new: true });
-            res.json({ data: updatedProduct, message: "Product updated successfully" });
+            res.redirect(`/dashboard/${id}`);
             } catch (error) {
                 console.error(error);
                 res.status(500).json({ error: "Error while updating product" });

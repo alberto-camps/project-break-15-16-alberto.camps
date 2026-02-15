@@ -12,9 +12,9 @@ const router  =  express.Router();
 
 
 //home de la tienda lista
-router.get('/products', productController.showProductsHtml);
+router.get(['/products', '/'], productController.showProductsHtml);
 
-//detalle de oroducto(HTML)
+//detalle de producto(HTML)
 router.get('/products/:productId', productController.showProductDetailHtml);
 
 // Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
@@ -25,9 +25,6 @@ router.get('/api/products', productController.showProducts);
 router.get('/api/products/:productId', productController.showProductById);
 
 
-// Devuelve el detalle de un producto.
-// En el dashboard aparecerán todos los artículos que se hayan subido.
-
 
 
     // ------------DASHBOARD DE ADMINISTRACIÓN------------ 
@@ -35,27 +32,16 @@ router.get('/api/products/:productId', productController.showProductById);
 //API
 router.get('/dashboard', productController.showDashboardHtml);
 
-router.get('/dashboard/new', productController.showNewProductForm);
-
+router.get('/dashboard/new', productController.showNewProductForm); // Formulario para crear nuevo producto
 router.post('/dashboard', productController.createProduct);//Crea un nuevo producto
-router.put('/dashboard/:productId/edit', productController.updateProduct);//Actualiza un producto
+
 router.get('/dashboard/:productId/edit', productController.showEditProductForm);//Muestra el formulario para editar un producto
+router.put('/dashboard/:productId', productController.updateProduct);//Actualiza un producto
+
+router.get('/dashboard/:productId', productController.showDasboardProductById);//Muestra el detalle de un producto en el dashboard
+
+
 router.post('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
-
-/*
-// Devuelve el dashboard del administrador    
-router.get('/dashboard', productController.showDashboard);
-
-// Devuelve el formulario para subir un artículo nuevo
-    router.get('/dashboard/new', productController.showNewProduct)
-
-// Devuelve el detalle de un producto en el dashboard.
-    router.get('/dashboard/:productId', productController.showDashboardProductById)
-
-// Devuelve el formulario para editar un producto.
-    router.get('/dashboard/:productId/edit', productController.showEditProduct) 
-
-    */
 
 
 module.exports = router;
