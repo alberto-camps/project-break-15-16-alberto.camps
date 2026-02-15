@@ -4,7 +4,7 @@ function getProductCards (products) {
        return `<p>No hay productos disponibles</p>`;
    }
 
-   let html = '';
+   let html = '<div class="products-grid">';
 
    for (const product of products) {
        html += `
@@ -16,6 +16,8 @@ function getProductCards (products) {
         </div>  
        `;
    }
+
+   html +='</div>'
 
    return html;
 }

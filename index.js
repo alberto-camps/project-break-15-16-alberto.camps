@@ -39,3 +39,20 @@ app.use('/', swaggerUI.serve,swaggerUI.setup(docs))
 dbConnection(mongo_uri);
 
 app.listen(PORT, () => console.log(`Server started on port http://localhost:${PORT}`));
+
+/* prueba de subida iamgenes cloudinary
+const cloudinary = require ('./config/cloudinary');
+
+const testSubida = async() => {
+    try {
+        const result = await cloudinary.uploader.upload('./camisetaGrisClaro.jpg');
+        
+        console.log("subida OK");
+        console.log(result.secure_url);
+    } catch (error) {
+        console.log("ERROR");
+        console.log(error);
+    }
+};
+
+testSubida(); */

@@ -8,6 +8,7 @@ const ProductModel = require("../models/Product")
 const template = require('../helpers/template');
 const getProductCards = require('../helpers/getProductCards');
 const generateDashboardHtml = require('../helpers/dashboardHtml');
+const cloudinary = require("../config/cloudinary");
 
 const productController = {
 
@@ -95,8 +96,20 @@ const productController = {
 
     createProduct: async (req, res) => {
         try {
-            const { name, description, image, category, price, size } = req.body;
-            const newProduct = await ProductModel.create({ name, description, image, category, size, price });
+         console.log("BODY:", req.body);
+         console.log("FILE:", req.file);
+
+            const { name, description, category, price, size } = req.body;
+            const result = await cloudinary.uploader.upload(req.file.path);//subir img a cloudinary
+
+            const newProduct = await ProductModel.create({ 
+                name, 
+                description, 
+                image: result.secure_url, 
+                category, 
+                size, 
+                price: Number(price) 
+            });
             res.redirect('/dashboard');
         } catch (error) {
             console.error("Error while creating product:", error);
@@ -139,7 +152,7 @@ const productController = {
     showNewProductForm: (req, res) => {
         const html = template(`
             <h1>Crear nuevo producto</h1>
-            <form action="/dashboard" method="POST">
+            <form action="/dashboard" method="POST" enctype="multipart/form-data">
 
               <label>Nombre:</label>
               <input type="text" name="name" required />
@@ -147,8 +160,8 @@ const productController = {
               <label>Descripción:</label>
               <textarea name="description" required></textarea>
 
-              <label>Imagen (URL):</label>
-              <input tupe="text" name="image" required />
+              <label>Imagen:</label>
+              <input type="file" name="image" required />
 
               <label>Categoría:</label>
               <select name ="category" required>

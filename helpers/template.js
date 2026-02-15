@@ -4,7 +4,12 @@ const getNavBar = require('./getNavBar');
 
 function template (content) {
     const nav = getNavBar();
-    return baseHtml(nav + content);
+    return baseHtml (`
+        ${nav}
+        <div class="container">
+         ${content}
+        <div>
+        `);
 }
 
 module.exports = template;
