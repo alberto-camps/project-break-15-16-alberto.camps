@@ -45,5 +45,10 @@ router.get('/dashboard/:productId', productController.showDasboardProductById);/
 
 router.post('/dashboard/:productId/delete', productController.deleteProduct);//elimina un producto
 
+//login y seguridad
+router.get('/login', productController.showLoginForm);
+router.post('/login', productController.login);
+router.get('/logout', productController.logout);
+
 
 module.exports = router;

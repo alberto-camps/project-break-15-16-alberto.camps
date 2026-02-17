@@ -2,8 +2,8 @@ const baseHtml = require('./baseHtml');
 const getNavBar = require('./getNavBar');
 /* const dashboard = require('./dashboardHtml'); */
 
-function template (content) {
-    const nav = getNavBar();
+function template (content, req) {
+    const nav = getNavBar(req);
     return baseHtml (`
         ${nav}
         <div class="container">

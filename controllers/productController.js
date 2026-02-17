@@ -17,7 +17,7 @@ const productController = {
         try {
             const products = await ProductModel.find();
             const cardsHtml = getProductCards(products);
-            const html = template(cardsHtml);
+            const html = template(cardsHtml, req);
             res.send(html)
         } catch(error) {
             console.error(error);
@@ -43,7 +43,7 @@ const productController = {
                   <p><strong>${product.price} €</strong></p>
                   <a href="/products">Volver a la tienda</a>
                 </div>
-            `);
+            `, req);
 
             res.send(html);
         }catch(error){
@@ -121,7 +121,8 @@ const productController = {
         try {
             const products = await ProductModel.find();
             const dashboardHtml = generateDashboardHtml(products);
-            res.send(dashboardHtml);
+            const html = template(dashboardHtml, req);
+            res.send(html);
         } catch (error) {
             console.error(error);
             res.status(500).send("Error while loading dashboard");
@@ -141,7 +142,7 @@ const productController = {
                 <p>${product.description}</p>
                 <p><strong>${product.price} €</strong></p>
                 <a href="/dashboard">Volver al dashboard</a>
-            `);
+            `, req);
             res.send(html);
         } catch (error) {
             console.error(error);
@@ -187,7 +188,7 @@ const productController = {
 
               <button type="submit">Crear producto</button>
             </form>
-            `);
+            `, req);
         res.send(html);
     },
  
@@ -221,7 +222,7 @@ const productController = {
                     </select>
                     <input type="number" name="price" value="${product.price}" required />
                     <button type="submit">Actualizar producto</button>
-                </form>`);
+                </form>`, req);
             res.send(html);
         } catch (error) {
             console.error(error);
@@ -260,7 +261,44 @@ const productController = {
     }
 },
 
+//login
 
+showLoginForm: (req, res) => {
+    const html = template(`
+        <h1>Login Admin</h1>
+        <form action="/login" method="POST">
+          <input type="text" name="user" placeholder="Usuario" required />
+          <input type="password" name="password" placeholder="Contraseña" required />
+          <button type="submit">Entrar</button>
+        </form>
+        `, req);
+    res.send(html);
+},
+
+login: (req, res) => {
+    const { user, password } = req.body;
+
+    if(
+        user === process.env.ADMIN_USER &&
+        password === process.env.ADMIN_PASSWORD
+    ){
+        req.session.isAdmin = true;
+        return res.redirect('/dashboard');
 }
 
-module.exports = productController
+     res.send('Usuario o Contraseña Incorrecto');
+
+
+},
+
+logout: (req, res) => {
+    req.session.destroy((error) =>{
+        if (error) {
+            return res.send('Error de cierre de sesión');
+        }
+        res.redirect('./login');
+    });
+},
+};
+
+module.exports = productController;

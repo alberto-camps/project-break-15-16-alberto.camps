@@ -11,6 +11,7 @@ const { dbConnection } = require('./config/db');
 const routes = require('./routes/productRoutes');
 const mongo_uri = process.env.MONGO_URI;
 const methodOverride = require('method-override');
+const session = require('express-session');
 
 
 
@@ -33,6 +34,13 @@ app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.json());
+
+//sitio seguro
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
    
    
    /* app.use('/dashboard', authMiddleware, authRoutes); */
@@ -47,19 +55,3 @@ app.listen(PORT, () => console.log(`Server started on port http://localhost:${PO
    app.use('/', swaggerUI.serve,swaggerUI.setup(docs))
    */
   
-  /* prueba de subida iamgenes cloudinary
-  const cloudinary = require ('./config/cloudinary');
-  
-  const testSubida = async() => {
-    try {
-        const result = await cloudinary.uploader.upload('./camisetaGrisClaro.jpg');
-        
-        console.log("subida OK");
-        console.log(result.secure_url);
-        } catch (error) {
-            console.log("ERROR");
-            console.log(error);
-            }
-            };
-            
-            testSubida(); */
