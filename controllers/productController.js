@@ -187,6 +187,7 @@ const productController = {
               <input type="number" name="price" required />
 
               <button type="submit">Crear producto</button>
+              <a href="/dashboard">Volver al dashboard</a>
             </form>
             `, req);
         res.send(html);
