@@ -1,11 +1,9 @@
-const getDashboardNavBar = require('./getDashboardNavBar');
-
 function generateDashboardHtml(products) {
     if (!products || products.length === 0) {
         return `<p>No hay productos disponibles</p>`;
     }
 
-    let html = getDashboardNavBar();
+    let html = '';
 
     for (const product of products) {
         html += `

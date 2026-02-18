@@ -11,45 +11,45 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 
 
-// ------------TIENDA PÚBLICA (HTML)------------
+// ------------TIENDA PÚBLICA------------
 
-
-//home de la tienda lista
+// Home / listado de productos (HTML)
 router.get(['/products', '/'], productController.showProductsHtml);
 
-//detalle de producto(HTML)
+// Detalle de producto (HTML)
 router.get('/products/:productId', productController.showProductDetailHtml);
 
-// Devuelve todos los productos. Cada producto tendrá un enlace a su página de detalle.
-
-//devuelve API (JSON)
+// Listado de productos (JSON)
 router.get('/api/products', productController.showProducts);
-// Si clickamos en uno de ellos nos llevará a su página para poder actualizarlo o eliminarlo.  
+
+// Detalle de producto (JSON)  
 router.get('/api/products/:productId', productController.showProductById);
 
 
 
 
-    // ------------DASHBOARD DE ADMINISTRACIÓN------------ 
+// ------------DASHBOARD DE ADMINISTRACIÓN------------ 
 
-//API
+//dashboard de administración (HTML)
 router.get('/dashboard', authMiddleware, productController.showDashboardHtml);
 
-router.get('/dashboard/new', authMiddleware, productController.showNewProductForm); // Formulario para crear nuevo producto
-router.post('/dashboard', upload.single('image'), authMiddleware, productController.createProduct);//Crea un nuevo producto
+// Formulario para crear nuevo producto (HTML)
+router.get('/dashboard/new', authMiddleware, productController.showNewProductForm); 
 
-router.get('/dashboard/:productId/edit', authMiddleware, productController.showEditProductForm);//Muestra el formulario para editar un producto
-router.put('/dashboard/:productId', authMiddleware, productController.updateProduct);//Actualiza un producto
+// Crear nuevo producto, con subida de imagen desde Cloudinary (HTML)
+router.post('/dashboard', upload.single('image'), authMiddleware, productController.createProduct);
 
-router.get('/dashboard/:productId', authMiddleware, productController.showDasboardProductById);//Muestra el detalle de un producto en el dashboard
+// Formulario para editar producto existente (HTML)
+router.get('/dashboard/:productId/edit', authMiddleware, productController.showEditProductForm);
 
+// Actualizar producto existente (HTML)
+router.put('/dashboard/:productId', authMiddleware, productController.updateProduct);
 
-router.post('/dashboard/:productId/delete', authMiddleware, productController.deleteProduct);//elimina un producto
+// Muestrar el detalle de un producto en el dashboard (HTML)
+router.get('/dashboard/:productId', authMiddleware, productController.showDasboardProductById);
 
-//login y seguridad
-router.get('/login', productController.showLoginForm);
-router.post('/login', productController.login);
-router.get('/logout', productController.logout);
+// Eliminar un producto (HTML)
+router.post('/dashboard/:productId/delete', authMiddleware, productController.deleteProduct);
 
 
 module.exports = router;
