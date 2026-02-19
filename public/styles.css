@@ -1,7 +1,4 @@
-/* styles.css
-   Estilos globales del proyecto */
-
-   /* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -19,49 +16,62 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+   margin: 0;
+   padding: 0;
+   border: 0;
+   font-size: 100%;
+   font: inherit;
+   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+   display: block;
 }
 body {
-	line-height: 1;
+   line-height: 1;
 }
 ol, ul {
-	list-style: none;
+   list-style: none;
 }
 blockquote, q {
-	quotes: none;
+   quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
-	content: none;
+   content: '';
+   content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+   border-collapse: collapse;
+   border-spacing: 0;
 }
 
 /* Nuestros CSS */
 
+:root{
+  --rosa-principal: #F05A8A;
+  --rojo-rosado: #E40046;
+  --verde-acido: #44D62C;
+  --morado-profundo: #6A3FB5;
+  --gris-lavanda: #B7A8C9;
+
+  --negro: #111111;
+  --blanco: #FFFFFF;
+}
+
 body {
-   font-family: Arial, Helvetica, sans-serif;
+   font-family: 'Fredericka the Great', cursive;
    background-color: #f5f5f5;
    color: #222;
    padding: 20px;
 }
 
 .logo {
-   font-size: 24px;
+   font-family: 'Metal Mania', cursive;
+   font-size: 60px;
    font-weight: bold;
+   -webkit-text-stroke: 0.01px var(--verde-acido);
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -69,21 +79,21 @@ body {
 }
 
 nav {
-   padding: 5px 20px;
-   margin-bottom: 30px;
-   gap: 15px;
    display: flex;
-   gap: 20px;
+   justify-content: space-between;
+   align-items: center;
+   padding: 10px 20px;
 }
 
 h1 { 
-   font-size: 24px;
+   font-family: 'Metal Mania', cursive;
+   font-size: 40px;
    margin-bottom: 20px;
 }
 
 a { 
    text-decoration: none;
-   color: #0066cc;
+   color: var(--rojo-rosado);
 }
 
 a:hover {
@@ -96,14 +106,14 @@ a:hover {
    display: block;
 }
 
-.poducts-grid {
+.products-grid {
    display: grid;
    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
    gap: 20px;
 }
 
 .product-card {
-   background: rgb(185, 182, 182);
+   background: var(--gris-lavanda);
    padding: 20px;
    border-radius: 8px;
    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -131,7 +141,7 @@ a:hover {
 }
 
 .product-detail {
-   background: white;
+   background: var(--gris-lavanda);
    padding: 20px;
    border-radius: 8px;
    max-width: 600px;
@@ -145,32 +155,33 @@ a:hover {
 }
 
 form{
-   background: white;
+   background:var(--gris-lavanda);
    padding: 20px;
    border-radius: 8px;
    max-width: 500px;
-   display: flex;
-   flex-wrap: wrap;
+   display: inline-flex;
    gap: 10px;
+   align-items: center;
 }
 
 input, textarea, select {
    padding: 8px;
-   border: 1px solid #eb90dd;
+   border: 1px solid var(--rojo-rosado);
    border-radius: 4px;
 }
 
 button {
+   font-family: 'Rubik Mono One', sans-serif;
    padding: 10px;
    border: none;
-   background-color: #222;
+   background-color: var(--morado-profundo);
    color: white;
    cursor: pointer;
    border-radius: 4px;
 }
 
 button:hover {
-   background-color: #ee0eaf;
+   background-color: var(--rojo-rosado);
 }
 
 .dashboard-list{

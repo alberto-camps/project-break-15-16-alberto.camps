@@ -4,7 +4,10 @@ function baseHtml(content){
         <html lang="es">
         <head>
             <meta charset="UTF-8" />
-            <title>Tienda de Ropa</title>
+            <title>Chuchuchuli Shop</title>
+             
+            <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Fredericka+the+Great&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+
             <link rel="stylesheet" href="/styles.css" />
         </head>
         <body>
