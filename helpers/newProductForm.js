@@ -1,7 +1,6 @@
-const Product = require('../models/Product');
 const template = require('./template');
 
-const newProductForm = (Product, req) => {
+const newProductForm = (product, req) => {
     return template(`
         <h1>Crear nuevo producto</h1>
         <form action="/dashboard" method="POST" enctype="multipart/form-data">

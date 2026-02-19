@@ -3,7 +3,7 @@ const template = require('./template');
 const editProductForm = (product, req) => {
     return template(`
         <h1>Editar producto</h1>
-        <form action="/dashboard/${product.Id}?_method=PUT" method="POST">
+        <form action="/dashboard/${product._id}?_method=PUT" method="POST">
             <input type="text" name="name" value="${product.name}" required />
             <textarea name="description" required>${product.description}</textarea>
             <input type="text" name="image" value="${product.image}" required />
@@ -24,8 +24,8 @@ const editProductForm = (product, req) => {
             </select>
             <input type="number" name="price" value="${product.price}" required />
             <button type="submit">Actualizar producto</button>
+            <a href="/dashboard">Volver al dashboard</a>
         </form>`, req);
-            res.send(html);
 }
 
 module.exports = editProductForm

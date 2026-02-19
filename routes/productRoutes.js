@@ -34,7 +34,11 @@ router.get('/api/products/:productId', productController.showProductById);
 router.get('/dashboard', authMiddleware, productController.showDashboardHtml);
 
 // Formulario para crear nuevo producto (HTML)
-router.get('/dashboard/new', authMiddleware, productController.showNewProductForm); 
+router.get('/dashboard/new', productController.showNewProductForm); 
+
+// Muestrar el detalle de un producto en el dashboard (HTML)
+router.get('/dashboard/:productId', authMiddleware, productController.showDasboardProductById);
+
 
 // Crear nuevo producto, con subida de imagen desde Cloudinary (HTML)
 router.post('/dashboard', upload.single('image'), authMiddleware, productController.createProduct);
@@ -44,9 +48,6 @@ router.get('/dashboard/:productId/edit', authMiddleware, productController.showE
 
 // Actualizar producto existente (HTML)
 router.put('/dashboard/:productId', authMiddleware, productController.updateProduct);
-
-// Muestrar el detalle de un producto en el dashboard (HTML)
-router.get('/dashboard/:productId', authMiddleware, productController.showDasboardProductById);
 
 // Eliminar un producto (HTML)
 router.post('/dashboard/:productId/delete', authMiddleware, productController.deleteProduct);

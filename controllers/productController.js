@@ -150,7 +150,7 @@ const productController = {
     // Mostrar formulario de creación de producto
     showNewProductForm: (req, res) => {
         try {
-            const html = newProductForm(productController, req);
+            const html = newProductForm(null, req);
             res.send(html);
          } catch (error) {
             console.error(error);
@@ -180,7 +180,10 @@ const productController = {
             const id = req.params.productId;
             const { name, description, image, category, price, size } = req.body;
             const updatedProduct = await ProductModel.findByIdAndUpdate(id, { name, description, image, category, price, size }, { new: true });
-            res.redirect(`/dashboard/${id}`);
+            if (!updatedProduct) {
+                return res.status(404).json({ error: "Producto no encontrado" });
+            }
+            res.redirect(`/dashboard/${updatedProduct._id}`);
             } catch (error) {
                 console.error(error);
                 res.status(500).json({ error: "Error while updating product" });
