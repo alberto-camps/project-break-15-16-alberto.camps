@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 const { dbConnection } = require('./config/db');
 const routes = require('./routes/productRoutes');
 const authRoutes = require('./routes/authRoutes');
+const productApiRoutes = require('./routes/productApiRoutes');
 const mongo_uri = process.env.MONGO_URI;
 const methodOverride = require('method-override');
 const session = require('express-session');
@@ -43,6 +44,7 @@ app.use(session({
 // Rutas de productos y autenticación
 app.use('/', routes);
 app.use('/', authRoutes);
+app.use('/api', productApiRoutes);
 app.use((req, res) => {
     res.status(404).send('Page not found');
 });

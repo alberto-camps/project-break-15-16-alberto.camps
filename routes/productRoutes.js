@@ -20,16 +20,6 @@ router.get('/products', productController.showProductsHtml);
 // Detalle de producto (HTML)
 router.get('/products/:productId', productController.showProductDetailHtml);
 
-// Listado de productos (JSON)
-router.get('/api/products', productController.showProducts);
-
-// Detalle de producto (JSON)  
-router.get('/api/products/:productId', productController.showProductById);
-
-// Eliminar producto (JSON)
-router.delete('/api/dashboard/:productId/delete', authMiddleware, productController.deleteProductApi);
-
-
 
 
 // ------------DASHBOARD DE ADMINISTRACIÓN------------ 
@@ -42,7 +32,6 @@ router.get('/dashboard/new', productController.showNewProductForm);
 
 // Muestrar el detalle de un producto en el dashboard (HTML)
 router.get('/dashboard/:productId', authMiddleware, productController.showDasboardProductById);
-
 
 // Crear nuevo producto, con subida de imagen desde Cloudinary (HTML)
 router.post('/dashboard', upload.single('image'), authMiddleware, productController.createProduct);
