@@ -25,6 +25,9 @@ router.get('/api/products', productController.showProducts);
 // Detalle de producto (JSON)  
 router.get('/api/products/:productId', productController.showProductById);
 
+// Eliminar producto (JSON)
+router.delete('/api/dashboard/:productId/delete', authMiddleware, productController.deleteProductApi);
+
 
 
 

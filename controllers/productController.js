@@ -207,7 +207,19 @@ const productController = {
         console.error(error);
         res.status(500).send("Error while deleting product");
     }
-}
+},
+
+// Delete API
+deleteProductApi: async (req, res) => {
+        try {
+            const id = req.params.productId;
+            const deletedProduct = await ProductModel.findByIdAndDelete(id);
+            res.json({ data: deletedProduct, message: "Product deleted successfully" });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Error while deleting product" });
+        }
+    }
 };
 
 module.exports = productController;
