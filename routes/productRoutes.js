@@ -14,7 +14,8 @@ const authMiddleware = require('../middlewares/authMiddleware');
 // ------------TIENDA PÚBLICA------------
 
 // Home / listado de productos (HTML)
-router.get(['/products', '/'], productController.showProductsHtml);
+router.get('/', productController.showHome);
+router.get('/products', productController.showProductsHtml);
 
 // Detalle de producto (HTML)
 router.get('/products/:productId', productController.showProductDetailHtml);

@@ -6,6 +6,7 @@
 const { error } = require("node:console")
 const ProductModel = require("../models/Product")
 const template = require('../helpers/template');
+const home = require('../helpers/home');
 const getProductCards = require('../helpers/getProductCards');
 const generateDashboardHtml = require('../helpers/dashboardHtml');
 const cloudinary = require("../config/cloudinary");
@@ -17,6 +18,11 @@ const editProductForm = require('../helpers/editProductForm');
 const productController = {
 
     // ------------TIENDA PÚBLICA------------
+
+    showHome:(req, res) => {
+        const html = home(req);
+        res.send(html);
+    },
 
     // JSON
     // Obtener productos en formato JSON para la API
@@ -61,10 +67,20 @@ const productController = {
     //Convertir datos a HTML para que devuelva la web
     showProductsHtml: async (req, res) => {
         try {
-            const products = await ProductModel.find();
-            const cardsHtml = getProductCards(products);
-            const html = template(cardsHtml, req);
-            res.send(html)
+           const { category} =req.query;
+
+           let products;
+
+           if(category) {
+            products = await ProductModel.find({category});
+           }else{
+            products= await ProductModel.find();
+           }
+
+           const cardsHtml = getProductCards(products);
+           const html = template(cardsHtml, req);
+           res.send(html);
+           
         } catch(error) {
             console.error(error);
             res.status(500).send('Error al cargar productos');

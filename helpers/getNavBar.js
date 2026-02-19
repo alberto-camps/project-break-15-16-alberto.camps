@@ -1,6 +1,6 @@
 function getNavBar(req) {
    return `
-   <div class="logo">Chuchuchuli Shop</div>
+   <a href="/" class="logo">Chuchuchuli Shop</a>
      <nav class="navbar">
          <a href="/products">Productos</a>
          ${
