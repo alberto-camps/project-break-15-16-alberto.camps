@@ -41,16 +41,18 @@ app.use(session({
 }));
    
    
-// Rutas de productos y autenticación
+// Rutas de productos, autenticación y APIs
 app.use('/', routes);
 app.use('/', authRoutes);
 app.use('/api', productApiRoutes);
 app.use((req, res) => {
     res.status(404).send('Page not found');
 });
-   
+
+
 dbConnection(mongo_uri);
-   
+
+
 app.listen(PORT, () => console.log(`Server started on port http://localhost:${PORT}`));
    
    

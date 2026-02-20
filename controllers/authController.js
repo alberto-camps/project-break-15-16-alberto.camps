@@ -30,10 +30,31 @@ const authController = {
             return res.redirect('/dashboard');
     }
     
-         res.send('Usuario o Contraseña Incorrecto');
+            res.send('Usuario o Contraseña Incorrecto');
     
     
     },
+
+    loginApi: (req, res) => {
+    const { user, password } = req.body;
+
+        if (
+            user === process.env.ADMIN_USER &&
+            password === process.env.ADMIN_PASSWORD
+        ) {
+            req.session.isAdmin = true;
+
+            return res.status(200).json({
+                message: 'Login correcto',
+                isAdmin: true
+            });
+        }
+
+        return res.status(401).json({
+        error: 'Usuario o contraseña incorrectos'
+        });
+    },
+
     
     logout: (req, res) => {
         req.session.destroy((error) =>{

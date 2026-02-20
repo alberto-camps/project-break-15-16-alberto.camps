@@ -1,6 +1,7 @@
 const ProductModel = require('../models/Product');
 
 const productApiController = {
+
     // Obtener productos en formato JSON para la API
     showProducts: async (req,res) => {
         try {
@@ -32,7 +33,7 @@ const productApiController = {
         try {
             const { name, description, image, category, price, size } = req.body;
             const newProduct = await ProductModel.create({ name, description, image, category, size, price });
-            res.status(201).json(newProduct);
+            res.json({data:newProduct, message:"Product created sucesfully"});
         } catch (error) {
             console.error("Error while creating product:", error);
             res.status(500).json({ error: "Error while creating product" });

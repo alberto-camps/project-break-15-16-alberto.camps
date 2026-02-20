@@ -146,21 +146,46 @@ a:hover {
    max-width: 600px;
 }
 
-.product-detail img {
+.product-detail, img {
    width: 100%;
    max-height: 400px;
    object-fit: cover;
    margin-bottom: 15px;
 }
 
-form{
+.newProduct-h1, .editProduct-h1, .newProductLink, .updateProductLink {
+   display: flex;
+   justify-content: center;
+   padding: 10px;
+}
+
+.newProductContainer form {
    background:var(--gris-lavanda);
    padding: 20px;
    border-radius: 8px;
    max-width: 500px;
-   display: inline-flex;
+   display: flex;
+   flex-direction: column;
+   margin-left: auto;
+   margin-right: auto;
    gap: 10px;
-   align-items: center;
+}
+
+.editProductContainer form {
+   background:var(--gris-lavanda);
+   padding: 20px;
+   border-radius: 8px;
+   max-width: 500px;
+   display: flex;
+   flex-direction: column;
+   margin-left: auto;
+   margin-right: auto;
+   gap: 10px;
+}
+
+form label {
+   display: flex;
+   flex-direction: column;
 }
 
 input, textarea, select {
