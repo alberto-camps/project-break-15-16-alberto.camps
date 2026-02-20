@@ -7,7 +7,7 @@ const productDetailView = (product, req) => {
             <h1>${product.name}</h1>
             <p>${product.description}</p>
             <p><strong>${product.price} €</strong></p>
-            <a href="/products">Volver a la tienda</a>
+            <a href="/products?category=${product.category}">Volver a ${product.category}</a>
         </div>
             `, req);
 };

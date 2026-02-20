@@ -34,7 +34,7 @@ router.get('/dashboard/new', productController.showNewProductForm);
 router.get('/dashboard/:productId', authMiddleware, productController.showDasboardProductById);
 
 // Crear nuevo producto, con subida de imagen desde Cloudinary (HTML)
-router.post('/dashboard', upload.single('image'), authMiddleware, productController.createProduct);
+router.post('/dashboard', authMiddleware, upload.single('image'), productController.createProduct);
 
 // Formulario para editar producto existente (HTML)
 router.get('/dashboard/:productId/edit', authMiddleware, productController.showEditProductForm);

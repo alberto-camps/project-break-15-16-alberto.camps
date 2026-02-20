@@ -71,6 +71,7 @@ body {
    font-family: 'Metal Mania', cursive;
    font-size: 60px;
    font-weight: bold;
+   color: var(--negro);
    -webkit-text-stroke: 0.01px var(--verde-acido);
    display: flex;
    flex-direction: column;
@@ -79,11 +80,19 @@ body {
 
 nav {
    display: flex;
-   justify-content: space-between;
+   justify-content: flex-end;
    align-items: center;
+   gap: 10px;
    padding: 10px 20px;
 }
 
+nav a{
+   background-color:var(--blanco);
+   padding: 5px 12px;
+   border-radius: 6px;
+   border: 1.5px solid var(--verde-acido);
+   font-size: 14px;
+}
 h1 { 
    font-family: 'Metal Mania', cursive;
    font-size: 40px;
@@ -92,11 +101,12 @@ h1 {
 
 a { 
    text-decoration: none;
+   color: var(--morado-profundo)
 }
 
 a:hover {
    text-decoration:  none;
-   color: #222;
+   color: var(--rojo-rosado)
 }
 
 .container {
@@ -132,6 +142,11 @@ a:hover {
 }
 
 .product-card h2 {
+   height: 60px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
    font-size: 20px;
 }
 
@@ -146,10 +161,27 @@ a:hover {
    max-width: 600px;
 }
 
-.product-detail, img {
+.product-detail p {
+   display: inline-block;
+}
+
+.product-detail p:last-of-type {
+   float: right;
+}
+
+.product-detail a {
+   display: block;
+   clear: both;
+   margin-top: 10px;
+}
+
+
+.product-detail img {
+   border-radius: 12px;
    width: 100%;
    max-height: 400px;
-   object-fit: cover;
+   object-fit: contain;
+   display: block;
    margin-bottom: 15px;
 }
 
@@ -190,7 +222,7 @@ form label {
 
 input, textarea, select {
    padding: 8px;
-   border: 1px solid var(--rojo-rosado);
+   border: 2px solid var(--verde-acido);
    border-radius: 4px;
 }
 
@@ -208,30 +240,60 @@ button:hover {
    background-color: var(--rojo-rosado);
 }
 
-.dashboard-list{
-   display: flex;
-   flex-direction: column;
-   gap: 10px;
+.productDashboard-card{
+   background: var(--blanco);
+   width: 300px;
+   padding: 20px;
+   border-radius: 10px;
+   border: 2px solid var(--morado-profundo);
+   margin: 20px auto;
 }
 
-.dashboard-item {
-   background: white;
-   padding: 10px;
-   border-radius: 6px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
+.productDashboard-card img{
+   width: 240px;
+   height: 240px;
+   object-fit: cover;
+   display: block;
+   margin: 0 auto;
+}
+
+.productDashboard-card h2{
+   font-size: 18px;
+   margin-bottom: 15px;
+   text-align: center;
+}
+
+.productDashboard-card p{
+   margin-top: 10px;
+   margin-bottom: 10px;
+   text-align: center;
+}
+
+.productDashboard-card a{
+   font-size: 20px;
+   display: block;
+   margin-top: 10px;
+}
+
+.productDashboard-card button{
+   font-size: 10px;
+   padding: 6px 12px;
+   width: auto;
+   display: block;
+   margin-left: auto;
+   color: var(--negro);
+   background-color: var(--blanco);
+   border: solid var(--verde-acido);
 }
 
 .categories-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-  margin-top: 20px;
 }
 
 .category-card {
-  background: #b6a9c9;
+  background: var(--gris-lavanda);
   padding: 5px;
   border-radius: 12px;
   text-align: center;
@@ -251,4 +313,31 @@ button:hover {
 
 .category-card h2 {
   margin-top: 10px;
+}
+
+.dashboardDetailCard{
+   background: var(--blanco);
+   width: 300px;
+   padding: 20px;
+   border-radius: 10px;
+   border: 2px solid var(--morado-profundo);
+   margin:  20px auto;
+}
+
+.dashboardDetailCard img {
+   width: 240px;
+   height: 240px;
+   object-fit: cover;
+   display: block;
+   margin: 0 auto;
+}
+.dashboardDetailCard p {
+   margin: 10px 0;
+}
+
+.dashboardActions {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   margin-top: 10px;
 }

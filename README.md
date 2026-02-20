@@ -33,7 +33,7 @@ Esta organización nos permite separar lógica, rutas, vistas y configuración.
 #Autenticación:
 El acceso al dashboard está protegido mediante sesión (express-session).Las credenciales del administrador se definen en el archivo .env.
 
-//#Bonus:
+//#Bonus extra:
 
 
 #Instalación:
